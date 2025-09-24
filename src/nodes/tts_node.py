@@ -2,7 +2,7 @@ import torch
 from transformers import AutoProcessor, CsmForConditionalGeneration
 import soundfile as sf
 
-class tts:
+class Tts:
     def __init__(self):
         self.model_id = "/home/abhishek-maurya/learn-lang/model/marvis-tts-250m-v0.1-transformers"
         self.device = "cuda"if torch.cuda.is_available() else "cpu"
@@ -14,6 +14,6 @@ class tts:
         audio = self.model.generate(input_ids=inputs['input_ids'], output_audio=True)
         self.model.to("cpu")
         return audio
-    def convert(self, text):
+    def generate_audio(self, text):
         gen_audio = self._tts_model(text)
-        sf.write('output.wav', gen_audio.cpu().numpy(), 24000)
+        return gen_audio

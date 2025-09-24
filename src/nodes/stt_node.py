@@ -1,7 +1,7 @@
 import torch
 from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline
 
-class stt:
+class Stt:
     def __init__(self):
         self.model_id = "/home/abhishek-maurya/learn-lang/model/wishper-large-v3-turbo/whisper-large-v3-turbo"
         self.device = "cuda"if torch.cuda.is_available() else "cpu"
@@ -23,6 +23,6 @@ class stt:
         result = pipe(audio, return_timestamps=True, chunk_length_s=30, stride_length_s=5)
         pipe.model.to("cpu")
         return result
-    def convert(self, audio_path):
-        text = self._tts_model(audio_path)
+    def get_text(self, audio):
+        text = self._tts_model(audio)
         return text['text']
